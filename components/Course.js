@@ -44,9 +44,9 @@ export default function Profile() {
               <Text style={styles.details} variant="titleMedium">
               Code : CSC3112 | Dept :Engineering
               </Text>
-              <Divider />
+              <Divider style={styles.divider}/>
               <Text style={styles.detailhead} variant="titleLarge">
-                Biological Information
+                Course Information
               </Text>
               <View style={styles.detaildescription}>
                 <Text variant="titleMedium">Code : CSC3112</Text>
@@ -132,6 +132,5 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginTop: 30,
-    marginBottom: 30,
   },
 });
