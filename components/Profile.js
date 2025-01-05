@@ -7,7 +7,7 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { PaperProvider, Banner, Divider, Text } from "react-native-paper";
+import { PaperProvider, Banner, Divider, Text, Card } from "react-native-paper";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -30,6 +30,7 @@ export default function Profile(profile) {
               </Banner>
             </View>
           </View>
+          <Card style={styles.card}>
           <View style={styles.body}>
             <View style={styles.profile}>
               <Image source={require(`../assets/profilepic/1.jpg`)} style={styles.profile_pic} />
@@ -41,6 +42,7 @@ export default function Profile(profile) {
                 <Text  variant="titleMedium">Phone : 0771234567</Text>
                 <Text  variant="titleMedium">Address : 123, Galle Road, Colombo 03</Text>
               </View>
+              <Divider style={styles.divider} />
               <Text style={styles.detailhead} variant="titleMedium">Biological Information</Text>
               <View style={styles.detaildescription}>
                 <Text  variant="titleMedium">Gender : Female</Text>
@@ -49,6 +51,7 @@ export default function Profile(profile) {
               </View>
             </View>
           </View>
+          </Card>
           <View style={styles.footer}>
           <Text  variant="titleMedium" style={styles.footerText}>UOV © 2025</Text>
           </View>
@@ -124,7 +127,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop:5,
         marginLeft: 10,
-        marginTop: 50,
+        marginTop: 20,
+        marginBottom: 10,
     },
     detaildescription:{
         flex: 1,
@@ -135,4 +139,17 @@ const styles = StyleSheet.create({
     footerText:{
         color: "#fff",
     },
+    card:{
+        flex: 1,
+        width: "96%",
+        textAlign: "center",
+        marginLeft: 10,
+        marginRight: 20,
+        marginBottom: 20,
+        marginTop: 0,
+    },
+    divider:{
+        marginTop: 20,
+        marginBottom: 20,
+    }
 });
