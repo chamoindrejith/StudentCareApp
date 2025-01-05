@@ -32,11 +32,26 @@ export default function Profile(profile) {
           </View>
           <View style={styles.body}>
             <View style={styles.profile}>
-              <Image source={profile.profile_pic} style={styles.profile_pic} />
-              <Text style={styles.text} variant="headlineMedium">{profile.name}</Text>
+              <Image source={require(`../assets/profilepic/1.jpg`)} style={styles.profile_pic} />
+              <Text style={styles.text} variant="headlineMedium">Alice Johnson</Text>
+              <Text style={styles.details} variant="titleMedium">Age : 21 | Gender : Female</Text>
+              <Text style={styles.detailhead} variant="titleMedium">Contact Details</Text>
+              <View style={styles.detaildescription}>
+                <Text  variant="titleMedium">Email : alice.jhonson@example.com</Text>
+                <Text  variant="titleMedium">Phone : 0771234567</Text>
+                <Text  variant="titleMedium">Address : 123, Galle Road, Colombo 03</Text>
+              </View>
+              <Text style={styles.detailhead} variant="titleMedium">Biological Information</Text>
+              <View style={styles.detaildescription}>
+                <Text  variant="titleMedium">Gender : Female</Text>
+                <Text  variant="titleMedium">Age : 21</Text>
+                <Text  variant="titleMedium">Blood Group : O+</Text>
+              </View>
             </View>
           </View>
-          <View style={styles.footer}></View>
+          <View style={styles.footer}>
+          <Text  variant="titleMedium" style={styles.footerText}>UOV © 2025</Text>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </PaperProvider>
@@ -75,8 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "10%",
-    alignItems: "baseline",
-    marginTop: 170,
+    alignItems: "center",
+    marginTop: 20,
   },
   image: {
     flex: 1,
@@ -84,10 +99,40 @@ const styles = StyleSheet.create({
     height: 95,
     alignSelf: "center",
   },
-  profile: {
+  profile_pic: {
     flex: 1,
-    width: windowWidth,
-    height: 95,
+    width: 160,
+    height: 160,
     alignSelf: "center",
   },
+  text:{
+    flex: 1,
+    width: "100%",
+    textAlign: "center",
+    fontWeight: "bold",
+    marginTop:5,
+  },
+    details:{
+        flex: 1,
+        width: "100%",
+        textAlign: "center",
+    },
+    detailhead:{
+        flex: 1,
+        width: "100%",
+        textAlign: "left",
+        fontWeight: "bold",
+        marginTop:5,
+        marginLeft: 10,
+        marginTop: 50,
+    },
+    detaildescription:{
+        flex: 1,
+        width: "100%",
+        textAlign: "left",
+        marginLeft: 10,
+    },
+    footerText:{
+        color: "#fff",
+    },
 });
