@@ -7,11 +7,17 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { PaperProvider, Banner, Divider, Text, Card } from "react-native-paper";
+import { PaperProvider, Banner, Divider, Text, Card , Provider} from "react-native-paper";
+import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Course from "./Course";
+import Subjects from "./Subjects";
+import { useState } from "react";
 
 const windowWidth = Dimensions.get("window").width;
+const Tab = createMaterialBottomTabNavigator();
 
-export default function Profile(profile) {
+export function Profile({Profile}) {
   return (
     <PaperProvider>
       <KeyboardAvoidingView
@@ -61,6 +67,42 @@ export default function Profile(profile) {
   );
 }
 
+export default function BottomNav() {
+    return (
+      <Provider>
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Profile"
+              component={Profile}
+              options={{
+                tabBarIcon: () => (
+                  <MaterialCommunityIcons name="account" color={"#79027d"} size={26} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Course"
+              component={Course}
+              options={{
+                tabBarIcon: () => (
+                  <MaterialCommunityIcons name="school" color={"#79027d"} size={26} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Subjects"
+              component={Subjects}
+              options={{
+                tabBarIcon: () => (
+                  <MaterialCommunityIcons name="book-open" color={"#79027d"} size={26} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+      </Provider>
+    );
+  }
+
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
@@ -104,9 +146,11 @@ const styles = StyleSheet.create({
   },
   profile_pic: {
     flex: 1,
-    width: 160,
-    height: 160,
+    width: 150,
+    height: 150,
     alignSelf: "center",
+    borderRadius: 90,
+    marginTop: 20,
   },
   text:{
     flex: 1,
@@ -127,7 +171,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop:5,
         marginLeft: 10,
-        marginTop: 20,
+        marginTop: 40,
         marginBottom: 10,
     },
     detaildescription:{
@@ -149,7 +193,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
     },
     divider:{
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 30,
+        marginBottom: 0,
     }
 });
