@@ -3,11 +3,12 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Dimensions,
   Image,
   Platform,
 } from "react-native";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   PaperProvider,
   Text,
@@ -15,34 +16,35 @@ import {
   Banner,
   Divider,
   Button,
+  Icon,
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import {students} from "../assets/StudentsDb"
 
 const windowWidth = Dimensions.get("window").width;
+const navigation = useNavigation();
+const [data, setDate] = useState({
+  userName: "",
+  password: "",
+})
+const [isSecure, setIsSecure] = useState(true);
+const [error, setError] = useState("");
+
+const handleLogin = () => {
+  if(!data.userName || !data.password){
+    setError("Please check your username and password");
+    return
+  }
+  const student = students.find((student)=>student.userName === data.userName)
+
+  if(!student || student.password !== data.password){
+    setError("Please check your username and password");
+    return
+  }
+  navigation.navigate("Profile", {student})
+}
 
 export default function Profile() {
-  const navigation = useNavigation();
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [profile, setProfile] = useState("");
-  const [error, setError] = useState("");
-
-  const handleLogin = () => {
-    let foundUser = null;
-    students.map((user) => {
-      if (user.username === userName && user.password === password) {
-        foundUser = user;
-      }
-    })
-    if (foundUser) {
-      setProfile(foundUser)
-      navigation.navigate("Profile", {profile} )
-    } else {
-      setError("Please check your username and password");
-      setProfile(null);
-    }
-  };
   return (
     <PaperProvider>
       <KeyboardAvoidingView
@@ -71,14 +73,12 @@ export default function Profile() {
                 value={userName}
                 onChangeText={(userName) => setUserName(userName)}
               />
-            </View>
-            <View style={styles.input}>
               <TextInput
                 label="Password"
                 value={password}
                 onChangeText={(password) => setPassword(password)}
-                secureTextEntry
-                right={<TextInput.Icon icon="eye" />}
+                right={<TextInput.Icon icon="eye" onPress={()=>setIsSecure(!isSecure)}/>}
+                secureTextEntry={isSecure}
               />
               
             </View>
@@ -91,10 +91,13 @@ export default function Profile() {
                 Login
               </Button>
             </View>
-            <View>
-            {error ? <Text style={styles.error} >{error}</Text> 
-            : null}
-            </View>
+           
+            {error && (
+              <View style={styles.error}>
+                <Icon source="alert-circle" size={20} style={styles.icon}/>
+                <Text>{error}</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.footer}></View>
@@ -152,4 +155,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     color: "red",
   },
+  icon:{
+    color: "red",
+  }
 });

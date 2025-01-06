@@ -2,7 +2,7 @@ import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Profile from "./components/Profile";
+import Profile from "./components/Profile"
 import Course from "./components/Course";
 import Subjects from "./components/Subjects";
 import Login from "./components/Login";

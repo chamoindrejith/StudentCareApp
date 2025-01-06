@@ -9,15 +9,12 @@ import {
 } from "react-native";
 import { PaperProvider, Banner, Divider, Text, Card , Provider} from "react-native-paper";
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Course from "./Course";
-import Subjects from "./Subjects";
-import { useState } from "react";
 
 const windowWidth = Dimensions.get("window").width;
 const Tab = createMaterialBottomTabNavigator();
 
-export function Profile({Profile}) {
+export function Profile({student}) {
+
   return (
     <PaperProvider>
       <KeyboardAvoidingView
@@ -39,21 +36,21 @@ export function Profile({Profile}) {
           <Card style={styles.card}>
           <View style={styles.body}>
             <View style={styles.profile}>
-              <Image source={require(`../assets/profilepic/1.jpg`)} style={styles.profile_pic} />
-              <Text style={styles.text} variant="headlineMedium">Alice Johnson</Text>
-              <Text style={styles.details} variant="titleMedium">Age : 21 | Gender : Female</Text>
+              <Image source={student.profile_pic} style={styles.profile_pic} />
+              <Text style={styles.text} variant="headlineMedium">{student.name}</Text>
+              <Text style={styles.details} variant="titleMedium">Age : {student.age} | Gender : {student.gender}</Text>
               <Text style={styles.detailhead} variant="titleMedium">Contact Details</Text>
               <View style={styles.detaildescription}>
-                <Text  variant="titleMedium">Email : alice.jhonson@example.com</Text>
-                <Text  variant="titleMedium">Phone : 0771234567</Text>
-                <Text  variant="titleMedium">Address : 123, Galle Road, Colombo 03</Text>
+                <Text  variant="titleMedium">Email : {student.email}</Text>
+                <Text  variant="titleMedium">Phone : {student.phone}</Text>
+                <Text  variant="titleMedium">Address : {student.address}</Text>
               </View>
               <Divider style={styles.divider} />
               <Text style={styles.detailhead} variant="titleMedium">Biological Information</Text>
               <View style={styles.detaildescription}>
-                <Text  variant="titleMedium">Gender : Female</Text>
-                <Text  variant="titleMedium">Age : 21</Text>
-                <Text  variant="titleMedium">Blood Group : O+</Text>
+                <Text  variant="titleMedium">Gender : {student.gender}</Text>
+                <Text  variant="titleMedium">Age : {student.age}</Text>
+                <Text  variant="titleMedium">Blood Group : {student.blood_group}</Text>
               </View>
             </View>
           </View>
@@ -66,42 +63,6 @@ export function Profile({Profile}) {
     </PaperProvider>
   );
 }
-
-export default function BottomNav() {
-    return (
-      <Provider>
-          <Tab.Navigator>
-            <Tab.Screen
-              name="Profile"
-              component={Profile}
-              options={{
-                tabBarIcon: () => (
-                  <MaterialCommunityIcons name="account" color={"#79027d"} size={26} />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Course"
-              component={Course}
-              options={{
-                tabBarIcon: () => (
-                  <MaterialCommunityIcons name="school" color={"#79027d"} size={26} />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Subjects"
-              component={Subjects}
-              options={{
-                tabBarIcon: () => (
-                  <MaterialCommunityIcons name="book-open" color={"#79027d"} size={26} />
-                ),
-              }}
-            />
-          </Tab.Navigator>
-      </Provider>
-    );
-  }
 
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
