@@ -81,6 +81,7 @@ export default function Login() {
                 onChangeText={(password) => setData({ ...data, password: password })}
                 right={<TextInput.Icon icon="eye" onPress={()=>setIsSecure(!isSecure)}/>}
                 secureTextEntry={isSecure}
+                style={styles.input}
                 
               />
               
@@ -133,16 +134,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   footer: {
-    backgroundColor: "#79027d",
-    flex: 1,
+    backgroundColor: "#79027d",   
     width: "100%",
-    height: "10%",
-    alignItems: "baseline",
-    marginTop: 120,
+    padding:20,
+    alignItems: "center",
+    marginTop: 200,
   },
   input: {
-    padding: 5,
-    marginBottom: 5,
+    padding: 1,
+    marginTop: 10,
   },
   image: {
     flex: 1,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   button: {
-    padding: 10,
+    padding: 20,
     marginBottom: 2,
   },
   error: {
