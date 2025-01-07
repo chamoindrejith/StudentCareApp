@@ -22,35 +22,36 @@ import { useNavigation } from "@react-navigation/native";
 import {students} from "../assets/StudentsDb"
 
 const windowWidth = Dimensions.get("window").width;
-const navigation = useNavigation();
-const [data, setDate] = useState({
-  userName: "",
-  password: "",
-})
-const [isSecure, setIsSecure] = useState(true);
-const [error, setError] = useState("");
 
-const handleLogin = () => {
-  if(!data.userName || !data.password){
-    setError("Please check your username and password");
-    return
+export default function Login() {
+  const navigation = useNavigation();
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+  })
+  const [isSecure, setIsSecure] = useState(true);
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    if(!data.username || !data.password){
+      setError("Please check your username and password");
+      return
+    }
+    const student = students.find((student)=>student.username === data.username)
+
+    if(!student || student.password !== data.password){
+      setError("Please check your username and password");
+      return
+    }
+    navigation.navigate("BottomNav", {student})
   }
-  const student = students.find((student)=>student.userName === data.userName)
 
-  if(!student || student.password !== data.password){
-    setError("Please check your username and password");
-    return
-  }
-  navigation.navigate("Profile", {student})
-}
-
-export default function Profile() {
   return (
     <PaperProvider>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoidingView}
-      >
+      ><TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.container}>
             <View>
@@ -67,18 +68,20 @@ export default function Profile() {
                 STUDENT LOGIN
               </Text>
             </View>
-            <View style={styles.input}>
+            <View >
               <TextInput
                 label="Username"
-                value={userName}
-                onChangeText={(userName) => setUserName(userName)}
+                value={data.username}
+                onChangeText={(username) => setData({ ...data, username: username })}
+                style={styles.input}
               />
               <TextInput
                 label="Password"
-                value={password}
-                onChangeText={(password) => setPassword(password)}
+                value={data.password}
+                onChangeText={(password) => setData({ ...data, password: password })}
                 right={<TextInput.Icon icon="eye" onPress={()=>setIsSecure(!isSecure)}/>}
                 secureTextEntry={isSecure}
+                
               />
               
             </View>
@@ -95,13 +98,14 @@ export default function Profile() {
             {error && (
               <View style={styles.error}>
                 <Icon source="alert-circle" size={20} style={styles.icon}/>
-                <Text>{error}</Text>
+                <Text >{error}</Text>
               </View>
             )}
           </View>
 
           <View style={styles.footer}></View>
         </ScrollView>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </PaperProvider>
   );
@@ -134,11 +138,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "10%",
     alignItems: "baseline",
-    marginTop: 170,
+    marginTop: 120,
   },
   input: {
-    padding: 10,
-    marginBottom: 2,
+    padding: 5,
+    marginBottom: 5,
   },
   image: {
     flex: 1,
@@ -153,9 +157,10 @@ const styles = StyleSheet.create({
   error: {
     padding: 10,
     marginBottom: 2,
+    marginTop: 10,
     color: "red",
+    flexDirection: "f4edf7",
+    gap :6,
+    borderRadius: 5,
   },
-  icon:{
-    color: "red",
-  }
 });

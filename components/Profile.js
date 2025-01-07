@@ -7,14 +7,11 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { PaperProvider, Banner, Divider, Text, Card , Provider} from "react-native-paper";
-import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
+import { PaperProvider, Banner, Divider, Text, Card } from "react-native-paper";
 
 const windowWidth = Dimensions.get("window").width;
-const Tab = createMaterialBottomTabNavigator();
 
-export function Profile({student}) {
-
+export default function Profile({student}) {
   return (
     <PaperProvider>
       <KeyboardAvoidingView
