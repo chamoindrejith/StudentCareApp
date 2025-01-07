@@ -17,7 +17,7 @@ import {
   } from "react-native-paper";
   
   const windowWidth = Dimensions.get("window").width;
-  export default function Profile() {
+  export default function Subjects({student}) {
     return (
       <PaperProvider>
         <KeyboardAvoidingView

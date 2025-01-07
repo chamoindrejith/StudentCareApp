@@ -13,11 +13,12 @@ import {
   Divider,
   Text,
   Card,
-  Provider,
 } from "react-native-paper";
+import { courses } from "../assets/StudentsDb";
 
 const windowWidth = Dimensions.get("window").width;
-export default function Profile() {
+export default function Course({student}) {
+  const course = courses.find((course) => course.id === student.course_id);
   return (
     <PaperProvider>
       <KeyboardAvoidingView
@@ -39,20 +40,20 @@ export default function Profile() {
           <View>
             <Card style={styles.card}>
               <Text style={styles.text} variant="headlineMedium">
-                Computer Science
+                {course.name}
               </Text>
               <Text style={styles.details} variant="titleMedium">
-              Code : CSC3112 | Dept :Engineering
+              Code : {course.course_code} | Dept :{course.department}
               </Text>
               <Divider style={styles.divider}/>
               <Text style={styles.detailhead} variant="titleLarge">
                 Course Information
               </Text>
               <View style={styles.detaildescription}>
-                <Text variant="titleMedium">Code : CSC3112</Text>
-                <Text variant="titleMedium">Department :Engineering</Text>
-                <Text variant="titleMedium">Duration : 4 years</Text>
-                <Text variant="titleMedium">Description : Focuses on programming and algorithms and system design</Text>
+                <Text variant="titleMedium">Code : {course.course_code}</Text>
+                <Text variant="titleMedium">Department :{course.department}</Text>
+                <Text variant="titleMedium">Duration : {course.duration}</Text>
+                <Text variant="titleMedium">Description : {course.description}</Text>
               </View>
             </Card>
           </View>
